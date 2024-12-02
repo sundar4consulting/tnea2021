@@ -1,0 +1,49 @@
+1. Create the Decision Table
+
+Navigate to Dev Studio: In the header, click Create -> Decision -> Decision Table.
+Provide a Rule Name: Use a descriptive name like "FeatureEnablement_LOB_Volume_Treatment".
+Context: Choose the appropriate class for this rule. If it's a general feature, you might use a system-level class. If it's specific to a case type, use that case type's class.
+Purpose: Clearly describe the purpose of this decision table (e.g., "Determine feature enablement based on Line of Business, Volume, and Treatment Level").
+2. Define the Decision Table Structure
+
+Columns (Conditions):
+
+LOB: Data type: Text. (e.g., "Retail", "Commercial", "Insurance")
+Volume: Data type: Integer. (e.g., Number of transactions, customer value)
+Treatment_Level: Data type: Text. (e.g., "Gold", "Silver", "Bronze")
+Rows:  Add rows to represent different combinations of conditions. For example:
+
+Row 1: LOB = "Retail", Volume >= 1000, Treatment_Level = "Gold"
+Row 2: LOB = "Commercial", Volume >= 5000, Treatment_Level = "Silver"
+Row 3: LOB = "", Volume >= 100, Treatment_Level = "" ( "*" can be used as a wildcard)
+Result: Data type: TrueFalse. This indicates whether the feature is enabled or disabled for the given conditions.
+
+3.  Configure the Decision Table
+
+Return true if: Select "Any row matches" if you want the feature enabled if any of the conditions are met. Select "All rows match" if all conditions in a row must be met.
+Otherwise return: Set this to false to disable the feature if no rows match.
+Delegation Options (Optional): If you want business users to manage this decision table, configure the appropriate delegation options to allow them to modify rows or columns.
+4.  Use the Decision Table in Your Application
+
+When Condition: You can use this decision table in a "When Condition" rule to control the visibility of a UI element or the execution of a process flow.
+Property: You can set a property value based on the result of the decision table.
+Decision Tree: You can incorporate the decision table into a more complex decision tree if needed.
+Example Usage (When Condition):
+
+When FeatureEnablement_LOB_Volume_Treatment
+This condition will evaluate to true if the current case or user context matches any of the rows in your decision table where the result is true.
+
+Key Considerations:
+
+Maintainability: Decision tables make it easier to manage and update feature enablement logic, especially when the criteria are complex or subject to change.
+Performance: For very complex decision tables, consider the performance implications. You might need to optimize the table structure or use other rule types for optimal efficiency.
+Testing: Thoroughly test your decision table to ensure it behaves as expected under different scenarios.
+Documentation: Clearly document the purpose and logic of your decision table to make it understandable for other developers and business users.
+By following these steps, you can effectively use a decision table in Pega to manage feature enablement based on your specific criteria.
+
+
+
+
+
+
+

@@ -15,3 +15,7 @@ Intent Extraction: When a new form is found, LLM analyzes the schema and generat
 Dynamic Registration: New intents are automatically registered with routing logic
 Query Processing: User queries are matched against dynamic intents and routed to the right forms
 Status Management: Tracks submission status and provides real-time updates
+
+
+
+Act as an Architect, I want you to design YAVA Master Orchestartor listing down the functinalties and associated compoents. Please create a sequence diagram via mermaid. The Orcehstartor should be able to service member intens on agent and asistant route. Please refer the diagram for solution approach. We really need to design the Orchestartor ina different way like simple, medium, complexity. The approach can use Agent registry or Tool registartion ( share solution for both approach and give recommendation what goes as tool vs agents). Orcehstartor should be able to cordinate each ( list down those scenorios) , Define the routing rules and explain how Master Orchestartor uses them for its function. Provide differen approach with usage of MCP Protocol as well. To a great extent think of all possible scenorio use cases Master orchestartor will work and how it is implemened. Provide references of memory and its uses in the sequence flow. Keep going and you rocks...

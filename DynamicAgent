@@ -1,0 +1,17 @@
+# Dynamic Agent Orchestrator for Form Intent Discovery
+
+## Architecture Overview
+
+The orchestrator needs to:
+1. Monitor Elasticsearch for new forms
+2. Analyze form structure and content
+3. Extract potential intents dynamically
+4. Update routing logic
+5. Register new handlers
+
+
+Form Discovery: Every 60 seconds, scans Elasticsearch for new forms
+Intent Extraction: When a new form is found, LLM analyzes the schema and generates appropriate intents
+Dynamic Registration: New intents are automatically registered with routing logic
+Query Processing: User queries are matched against dynamic intents and routed to the right forms
+Status Management: Tracks submission status and provides real-time updates

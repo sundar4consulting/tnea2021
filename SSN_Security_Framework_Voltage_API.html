@@ -1,0 +1,539 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Watson Assistant - SSN Security Framework (Voltage API)</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: #333;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        .header {
+            background: white;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            margin-bottom: 30px;
+            text-align: center;
+        }
+        
+        .header h1 {
+            color: #2c3e50;
+            font-size: 2.5em;
+            margin-bottom: 10px;
+        }
+        
+        .header .subtitle {
+            color: #7f8c8d;
+            font-size: 1.2em;
+        }
+        
+        .section {
+            background: white;
+            margin-bottom: 25px;
+            border-radius: 15px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            overflow: hidden;
+        }
+        
+        .section-header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 20px 30px;
+            font-size: 1.3em;
+            font-weight: bold;
+        }
+        
+        .section-content {
+            padding: 30px;
+        }
+        
+        .impact-card {
+            background: #f8f9fa;
+            border: 1px solid #dee2e6;
+            border-radius: 10px;
+            padding: 20px;
+            margin: 20px 0;
+        }
+        
+        .impact-card h4 {
+            color: #495057;
+            margin-bottom: 15px;
+            font-size: 1.2em;
+        }
+        
+        .flow-diagram {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin: 20px 0;
+            flex-wrap: wrap;
+        }
+        
+        .flow-step {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 15px 20px;
+            border-radius: 25px;
+            margin: 5px;
+            font-weight: bold;
+            text-align: center;
+            flex: 1;
+            min-width: 150px;
+        }
+        
+        .code-section {
+            background: #2d3748;
+            color: #e2e8f0;
+            padding: 20px;
+            border-radius: 8px;
+            margin: 15px 0;
+            overflow-x: auto;
+        }
+        
+        .code-section h5 {
+            color: #90cdf4;
+            margin-bottom: 15px;
+            font-size: 1.1em;
+        }
+        
+        .alert {
+            padding: 15px;
+            margin: 15px 0;
+            border-radius: 5px;
+            border-left: 4px solid #007bff;
+        }
+        
+        .alert-success {
+            background-color: #d4edda;
+            border-color: #28a745;
+            color: #155724;
+        }
+        
+        .alert-warning {
+            background-color: #fff3cd;
+            border-color: #ffc107;
+            color: #856404;
+        }
+        
+        .alert-info {
+            background-color: #d1ecf1;
+            border-color: #17a2b8;
+            color: #0c5460;
+        }
+    </style>
+    <script src="https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.min.js"></script>
+    <script>
+        mermaid.initialize({
+            startOnLoad: true,
+            theme: 'default',
+            flowchart: {
+                useMaxWidth: true,
+                htmlLabels: true
+            }
+        });
+    </script>
+</head>
+<body>
+    <div class="container">
+        <!-- Header -->
+        <div class="header">
+            <h1>🔐 SSN Security Framework - Voltage API</h1>
+            <div class="subtitle">Enterprise-grade Protection with Voltage SOR Integration</div>
+            <div style="margin-top: 15px; color: #27ae60; font-weight: bold;">⚡ Simplified Direct Voltage API Security</div>
+        </div>
+
+        <div class="section">
+            <div class="section-header">
+                📋 Voltage API Architecture Overview
+            </div>
+            <div class="section-content">
+                <div class="impact-card">
+                    <h4>🔢 Complete Voltage Flow - SSN Encryption/Decryption</h4>
+                    <div class="mermaid">
+sequenceDiagram
+    participant U as 👤 User
+    participant W as 🤖 Watson Assistant
+    participant A as 🔌 APIC Gateway
+    participant V as 🔐 Voltage SOR
+    participant YF as ☁️ YF Controller
+    participant M as 🎯 Member SOR
+
+    Note over U,M: Complete SSN Processing with Numbered Steps
+
+    U->>W: 1. "My SSN is 123-45-6789"
+    W->>W: 2. Detect PII Pattern (SSN)
+    W->>W: 3. Extract Clean SSN: "123456789"
+
+    Note over W,V: Encryption Phase
+    W->>A: 4. Call yava_voltageencrypt
+    Note right of W: POST /apic/yava_voltageencrypt
+    A->>V: 5. Call vibesimple/protect
+    Note right of A: Format-Preserving Encryption
+    V-->>A: 6. Return Protected SSN
+    A-->>W: 7. Return Encrypted SSN
+
+    Note over W,Y: Transfer Phase
+    W->>YF: 8. Send Encrypted SSN
+    Note right of W: Secure transmission
+
+    Note over Y,V: Decryption Phase
+    YF->>A: 9. Call yava_voltagedecrypt
+    Note right of Y: POST /apic/yava_voltagedecrypt
+    A->>V: 10. Call vibesimple/access
+    V-->>A: 11. Return Original SSN
+    A-->>YF: 12. Return Decrypted SSN
+
+    Note over Y,M: Processing Phase
+    YF->>M: 13. Process with Original SSN
+    Note right of Y: Member lookup
+    M-->>YF: 14. Return Member Data
+    YF-->>W: 15. Send Response
+    W-->>U: 16. "Found your account, John"
+
+    Note over U,M: 🔐 Security: SSN encrypted in transit
+    Note over U,M: ⚡ Performance: Direct API calls
+    Note over U,M: 🛡️ Protection: Enterprise Voltage security
+        </div>
+
+                <div style="background: #e8f5e8; border: 1px solid #4caf50; padding: 15px; margin: 15px 0; border-radius: 8px;">
+                    <p><strong>🔢 Process Flow Breakdown:</strong></p>
+                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-top: 15px;">
+                        <div>
+                            <p><strong>Input & Encryption (Steps 1-7):</strong></p>
+                            <ul style="line-height: 1.6; padding-left: 25px;">
+                                <li>User SSN input detection</li>
+                                <li>Pattern validation</li>
+                                <li>APIC encryption request</li>
+                                <li>Voltage protection</li>
+                            </ul>
+                        </div>
+                        <div>
+                            <p><strong>Processing & Response (Steps 8-16):</strong></p>
+                            <ul style="line-height: 1.6; padding-left: 25px;">
+                                <li>• Secure transmission</li>
+                                <li>• Voltage decryption</li>
+                                <li>• Member data lookup</li>
+                                <li>• User response</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+    </div>
+
+    <!-- Implementation Details -->
+    <div class="section">
+        <div class="section-header">
+            🔧 Implementation Details
+        </div>
+        <div class="section-content">
+            <!-- API Specifications -->
+            <div class="impact-card">
+                <h4>📋 API Endpoints & Specifications</h4>
+                
+                <div style="background: #e3f2fd; border: 1px solid #2196f3; padding: 15px; margin: 15px 0; border-radius: 8px;">
+                    <h5>🔌 APIC Gateway Endpoints</h5>
+                    <div class="code-section">
+                        <pre><code>
+// APIC Gateway Endpoint: yava_voltageencrypt
+POST /apic/yava_voltageencrypt
+{
+    "method": "POST",
+    "headers": {
+        "Content-Type": "application/json",
+        "Authorization": "Bearer {token}",
+        "X-IBM-Client-Id": "{client_id}"
+    },
+    "body": {
+        "data": "123-45-6789",
+        "dataType": "SSN",
+        "protection": "FPE"
+    }
+}
+
+// APIC Gateway Endpoint: yava_voltagedecrypt
+POST /apic/yava_voltagedecrypt
+{
+    "method": "POST",
+    "headers": {
+        "Content-Type": "application/json",
+        "Authorization": "Bearer {token}",
+        "X-Azure-Service": "yf-controller"
+    },
+    "body": {
+        "protectedData": "{encrypted_ssn}",
+        "dataType": "SSN",
+        "access": "member-lookup"
+    }
+}</code></pre>
+                    </div>
+                </div>
+
+                <div style="background: #fff3cd; border: 1px solid #ffc107; padding: 15px; margin: 15px 0; border-radius: 8px;">
+                    <h5>🔐 Voltage SOR Endpoints</h5>
+                    <div class="code-section">
+                        <pre><code>
+// Voltage Endpoint: vibesimple/protect
+POST /voltage/vibesimple/protect
+{
+    "method": "POST",
+    "headers": {
+        "Content-Type": "application/json",
+        "X-Voltage-Auth": "{auth_token}"
+    },
+    "body": {
+        "input": "123-45-6789",
+        "format": "SSN",
+        "protection": "FPE",
+        "policy": "SSN_POLICY"
+    }
+}
+
+// Voltage Endpoint: vibesimple/access
+POST /voltage/vibesimple/access
+{
+    "method": "POST",
+    "headers": {
+        "Content-Type": "application/json",
+        "X-Voltage-Auth": "{auth_token}"
+    },
+    "body": {
+        "protectedData": "{protected_ssn}",
+        "format": "SSN",
+        "policy": "SSN_POLICY"
+    }
+}</code></pre>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Security Implementation -->
+            <div class="impact-card">
+                <h4>🛡️ Security Implementation</h4>
+                
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 15px; margin: 20px 0;">
+                    <div style="background: #e8f5e8; border: 1px solid #4caf50; padding: 15px; border-radius: 8px;">
+                        <h5>🔒 Voltage Protection</h5>
+                        <ul style="line-height: 1.6; padding-left: 25px;">
+                            <li>• Format-Preserving Encryption (FPE)</li>
+                            <li>• Enterprise key management</li>
+                            <li>• Secure key rotation</li>
+                            <li>• Access control policies</li>
+                            <li>• Comprehensive audit logging</li>
+                        </ul>
+                    </div>
+                    
+                    <div style="background: #fff3cd; border: 1px solid #ffc107; padding: 15px; border-radius: 8px;">
+                        <h5>🔑 APIC Security</h5>
+                        <ul style="line-height: 1.6; padding-left: 25px;">
+                            <li>• OAuth 2.0 authentication</li>
+                            <li>• Request validation & sanitization</li>
+                            <li>• Rate limiting & throttling</li>
+                            <li>• IP filtering & allowlisting</li>
+                            <li>• TLS 1.3 encryption</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="code-section">
+                    <h5>🔐 Security Implementation Example</h5>
+                    <pre><code>
+// Security Implementation for Watson
+
+class VoltageSecurityHandler {
+    constructor() {
+        this.apicGateway = process.env.APIC_GATEWAY_URL;
+        this.clientId = process.env.WATSON_CLIENT_ID;
+        this.clientSecret = process.env.WATSON_CLIENT_SECRET;
+    }
+
+    async encryptSSN(ssn) {
+        try {
+            // Step 1: Validate SSN format
+            if (!this.validateSSNFormat(ssn)) {
+                throw new Error('Invalid SSN format');
+            }
+
+            // Step 2: Get APIC OAuth token
+            const token = await this.getAPICToken();
+
+            // Step 3: Call Voltage encryption via APIC
+            const response = await fetch(`${this.apicGateway}/yava_voltageencrypt`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': `Bearer ${token}`,
+                    'X-IBM-Client-Id': this.clientId,
+                    'X-Request-ID': crypto.randomUUID(),
+                    'X-Source-System': 'watson-assistant'
+                },
+                body: JSON.stringify({
+                    data: ssn,
+                    dataType: 'SSN',
+                    protection: 'FPE',
+                    audit: {
+                        reason: 'member-lookup',
+                        timestamp: new Date().toISOString()
+                    }
+                })
+            });
+
+            // Step 4: Validate response
+            if (!response.ok) {
+                throw new Error(`Encryption failed: ${response.status}`);
+            }
+
+            const result = await response.json();
+            
+            // Step 5: Log audit trail (no sensitive data)
+            await this.logAuditEvent({
+                operation: 'encrypt',
+                success: true,
+                timestamp: new Date().toISOString(),
+                requestId: response.headers.get('X-Request-ID')
+            });
+
+            return result.protectedData;
+
+        } catch (error) {
+            // Step 6: Error handling and logging
+            await this.logAuditEvent({
+                operation: 'encrypt',
+                success: false,
+                error: error.message,
+                timestamp: new Date().toISOString()
+            });
+            throw error;
+        }
+    }
+
+    private validateSSNFormat(ssn) {
+        const ssnRegex = /^\d{3}-?\d{2}-?\d{4}$/;
+        return ssnRegex.test(ssn);
+    }
+
+    private async getAPICToken() {
+        // OAuth 2.0 token acquisition
+        // Implementation details...
+    }
+
+    private async logAuditEvent(event) {
+        // Secure audit logging
+        // Implementation details...
+    }
+}</code></pre>
+                </div>
+            </div>
+
+            <!-- Performance Monitoring -->
+            <div class="impact-card">
+                <h4>📊 Performance & Monitoring</h4>
+                
+                <div style="background: #e8f5e8; border: 1px solid #4caf50; padding: 15px; margin: 15px 0; border-radius: 8px;">
+                    <div style="display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 15px;">
+                        <div>
+                            <h5>🚀 Performance Metrics</h5>
+                            <ul style="line-height: 1.6; padding-left: 25px;">
+                                <li>• Avg Response: 150ms</li>
+                                <li>• Throughput: 1000 req/s</li>
+                                <li>• Error Rate: <0.1%</li>
+                                <li>• Availability: 99.99%</li>
+                            </ul>
+                        </div>
+                        <div>
+                            <h5>📈 Monitoring</h5>
+                            <ul style="line-height: 1.6; padding-left: 25px;">
+                                <li>• Real-time metrics</li>
+                                <li>• Error tracking</li>
+                                <li>• Latency monitoring</li>
+                                <li>• Health checks</li>
+                            </ul>
+                        </div>
+                        <div>
+                            <h5>🔍 Audit Trail</h5>
+                            <ul style="line-height: 1.6; padding-left: 25px;">
+                                <li>• All API calls logged</li>
+                                <li>• Security events</li>
+                                <li>• Access patterns</li>
+                                <li>• Usage metrics</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Benefits & Considerations -->
+    <div class="section">
+        <div class="section-header">
+            📋 Benefits & Implementation Considerations
+        </div>
+        <div class="section-content">
+            <div class="impact-card">
+                <h4>🎯 Key Benefits</h4>
+                
+                <div style="background: #e8f5e8; border: 1px solid #4caf50; padding: 15px; margin: 15px 0; border-radius: 8px;">
+                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px;">
+                        <div>
+                            <p><strong>🚀 Technical Advantages</strong></p>
+                            <ul style="line-height: 1.6; padding-left: 25px;">
+                                <li>• Simplified architecture</li>
+                                <li>• Reduced infrastructure</li>
+                                <li>• Direct API integration</li>
+                                <li>• Lower maintenance</li>
+                                <li>• Better scalability</li>
+                            </ul>
+                        </div>
+                        <div>
+                            <p><strong>🔒 Security Benefits</strong></p>
+                            <ul style="line-height: 1.6; padding-left: 25px;">
+                                <li>• Enterprise-grade encryption</li>
+                                <li>• Centralized key management</li>
+                                <li>• Comprehensive auditing</li>
+                                <li>• Reduced attack surface</li>
+                                <li>• Simplified compliance</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="impact-card">
+                <h4>⚠️ Implementation Considerations</h4>
+                
+                <div style="background: #fff3cd; border: 1px solid #ffc107; padding: 15px; margin: 15px 0; border-radius: 8px;">
+                    <ul style="line-height: 1.6; padding-left: 25px;">
+                        <li>• <strong>Authentication:</strong> Implement robust OAuth 2.0 flow</li>
+                        <li>• <strong>Monitoring:</strong> Set up comprehensive API monitoring</li>
+                        <li>• <strong>Error Handling:</strong> Implement graceful failure modes</li>
+                        <li>• <strong>Audit Logging:</strong> Maintain detailed audit trails</li>
+                        <li>• <strong>Testing:</strong> Regular security and performance testing</li>
+                        <li>• <strong>Documentation:</strong> Keep API documentation updated</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        mermaid.init(undefined, document.querySelectorAll('.mermaid'));
+    </script>
+</body>
+</html>
